@@ -1,0 +1,91 @@
+using System;
+using System.Collections.Generic;
+
+namespace UniversityMembersApp
+{
+    public class Person
+    {
+        public string Name { get; set; }
+
+        public Person(string name)
+        {
+            Name = name;
+        }
+
+        public virtual void DisplayInfo()
+        {
+            Console.WriteLine($"Name: {Name}");
+        }
+    }
+
+    public class Student : Person
+    {
+        public int StudentId { get; set; }
+
+        public Student(string name, int studentId) : base(name)
+        {
+            StudentId = studentId;
+        }
+
+        public override void DisplayInfo()
+        {
+            Console.WriteLine($"Name: {Name}, Student ID: {StudentId}");
+        }
+    }
+
+    public class Employee : Person
+    {
+        public double Salary { get; set; }
+
+        public Employee(string name, double salary) : base(name)
+        {
+            Salary = salary;
+        }
+
+        public override void DisplayInfo()
+        {
+            Console.WriteLine($"Name: {Name}, Salary: {Salary}");
+        }
+    }
+
+    public class Teacher : Person
+    {
+        public string CourseName { get; set; }
+
+        public Teacher(string name, string courseName) : base(name)
+        {
+            CourseName = courseName;
+        }
+
+        public override void DisplayInfo()
+        {
+            Console.WriteLine($"Name: {Name}, Course Name: {CourseName}");
+        }
+    }
+
+    public class Program
+    {
+        public static void PrintMemberDetails(Person person)
+        {
+            person.DisplayInfo();
+        }
+
+        public static void Main(string[] args)
+        {
+            List<Person> members = new List<Person>
+            {
+                new Student("Saleh", 101),
+                new Employee("Mohammed", 1200.50),
+                new Teacher("Ali", "Programming")
+            };
+
+            foreach (Person member in members)
+            {
+                Console.WriteLine(member.GetType().Name);
+                member.DisplayInfo();
+            }
+
+            PrintMemberDetails(new Student("Saleh", 102));
+        }
+    }
+}
